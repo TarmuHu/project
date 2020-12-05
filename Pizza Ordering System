@@ -1,0 +1,183 @@
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
+public class PizzaOrder
+{
+
+	public static void main(String[] args) 
+	{
+		//task#1: declare your variables and assign their initial values
+		Scanner in = new Scanner(System.in);
+		
+		String owner1 = "Tim", owner2 = "Tarmu";
+		String crustType = "Hand-Tossed";
+		String name, yesOrNo, size;
+		
+		double cost = 12.99;
+		double tax, totalPrice;
+		int numberOfToppings = 1;
+		
+		boolean discount = false, peperoni = false, sausage = false, onion = false, mushroom = false;
+		//End of task#1 (Variables part)
+		
+		JOptionPane.showMessageDialog(null, "Welcome to Double T's Pizza House~");
+		
+		//Task#2 Comparing Strings, Using a Flag as a Condition
+		name = JOptionPane.showInputDialog("What is your name?");
+		if (owner1.equalsIgnoreCase(name)||owner2.equalsIgnoreCase(name)) //task#2 step#1: if statement(compare user name and owner name)
+		{
+			discount = true; //task#2 step#2: set "discount" to true
+		}
+		//End of task#2 (Part 1)
+		
+		//task#1: print out the menu
+		size = JOptionPane.showInputDialog("Menu"
+								   +"\nPizza size(inches)  Cost"
+								   +"\n             10           $10.99"
+								   +"\n             12           $12.99"
+								   +"\n             14           $14.99"
+								   +"\n             16           $16.99"
+								   +"\nWhat size of pizza do you want?(Enter numbers only)");
+		//End of task#1 (Menu part)
+		
+		//Task#3 The if-else-if Statement
+		if(size.equals("10"))	//task#3 step#1-1
+		{
+			cost = 10.99;
+		}
+		else if(size.equals("12"))	//task#3 step#1-2
+		{
+			cost = 12.99;
+		}
+		else if(size.equals("14"))	//task#3 step#1-3
+		{
+			cost = 14.99;
+		}
+		else if(size.equals("16"))	//task#3 step#1-4
+		{
+			cost = 16.99;
+		}
+		else 		//task#3 step#2
+		{
+			size = "12";
+			JOptionPane.showMessageDialog(null, "The size you order is not in the menu, your pizza will be default size."
+							  				   +"\nDefault size is 12 inches.");
+		}
+		//End of task#3
+		
+		//Task#4 The switch Statement
+		String crust = JOptionPane.showInputDialog("What type of crust do you want?(Hand-Tossed, Thin-Crust or Deep-Dish)"		 
+												  +"\nYou can only enter first character of the crust you want (H, T or D):");  
+		
+		switch (crust.charAt(0))		//task#4 step#1
+		{
+		case 'H': case 'h':
+			crustType="Hand-tossed";	//task#4 step#2-1
+			break;
+		case 'T': case 't':
+			crustType="Thin-crust";		//task#4 step#2-2
+			break;
+		case 'D': case 'd':
+			crustType="Deep-dish";		//task#4 step#2-3
+			break;
+		default:						//task#4 step#3
+			JOptionPane.showMessageDialog(null, "\nThe crust you order is not in the menu, your crust will be default type."
+											   +"\nDefult type of crust is Hand-Tossed.");
+		}
+		//End of task#4
+		
+		//Task#5 String Concatenation
+		JOptionPane.showMessageDialog(null, "All pizzas come with cheese."
+										   +"\nAdditional toppings are $1.25 each, choose from:"
+										   +"\nPeperoni, Sausage, Onion and Mushroom");
+		
+		yesOrNo = JOptionPane.showInputDialog("Do you want Peperoni?(Yes or No)"
+						  		   			 +"\nYou could just enter Y or N: ");
+		if (yesOrNo.charAt(0)=='Y' || yesOrNo.charAt(0)=='y')
+		{
+			numberOfToppings++;
+			peperoni = true;
+		}
+		
+		yesOrNo = JOptionPane.showInputDialog("Do you want Sausage?(Yes or No)"
+											 +"\nYou could just enter Y or N: ");
+		if (yesOrNo.charAt(0)=='Y' || yesOrNo.charAt(0)=='y')
+		{
+			numberOfToppings++;
+			sausage = true;
+		}
+		
+		yesOrNo = JOptionPane.showInputDialog("Do you want Onion?(Yes or No)"
+						  					 +"\nYou could just enter Y or N: ");
+		if (yesOrNo.charAt(0)=='Y' || yesOrNo.charAt(0)=='y')
+		{
+			numberOfToppings++;
+			onion = true;
+		}
+		
+		yesOrNo = JOptionPane.showInputDialog("Do you want Mushroom?(Yes or No)"
+											 +"\nYou could just enter Y or N: ");
+		if (yesOrNo.charAt(0)=='Y' || yesOrNo.charAt(0)=='y')
+		{
+			numberOfToppings++;
+			mushroom = true;
+		}
+		//End of task#5
+		
+		//task#2
+		if(discount) //task#2 step#3: if statement(boolean)
+		{
+			JOptionPane.showMessageDialog(null, "Congratulation, you get a $2.00 discount!"); //task#2 step#4a
+			cost = cost - 2; //task#2 step#4b
+		}
+		//End of task#2 (Part 2)
+		
+		cost = cost + (numberOfToppings-1)*1.25;
+		tax = cost * 0.08;
+		totalPrice = cost + tax;		
+		
+		JOptionPane.showMessageDialog(null, name + ", thanks for your ordering.");
+		
+		//Task#1: print out the final order and price
+		String s1 = ".";
+		if(numberOfToppings>1)
+		{
+			s1 = "s.";
+		}
+		
+		String toppings = "Cheese ";
+		if (peperoni)
+		{
+			toppings = toppings + "/Pepperoni ";
+		}
+		if (sausage)
+		{
+			toppings = toppings + "/Sausage ";
+		}
+		if (onion)
+		{
+			toppings = toppings + "/Onion ";
+		}
+		if (mushroom)
+		{
+			toppings = toppings + "/Mushroom";
+		}
+		
+		JOptionPane.showMessageDialog(null, "The following is your order:"
+									 +"\nPizza size: " + size + " inches."
+									 +"\nCrust type: " + crustType
+		
+									 +"\n\nYou have " + numberOfToppings + " topping" + s1
+									 +"\n(" + toppings + ")"
+									 
+									 +"\n\nPrice: " + (float)Math.round(cost*100)/100			//task#6 step#1-1
+									 +"\nTax: " + (float)Math.round(tax*100)/100				//task#6 step#1-2
+									 +"\nTotal: " + (float)Math.round(totalPrice*100)/100);	//task#6 step#1-3
+		//End of task#1 (final part)
+		
+		JOptionPane.showMessageDialog(null, "Your order will be ready for pickup in 30 minutes.");		//task#6 step2
+		
+		System.exit(0);
+	}//main
+
+}//class
