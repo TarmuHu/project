@@ -1,0 +1,40 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Task1 
+{
+	public static void main(String[] args) 
+	{
+		Stack<String> s = new Stack<>();
+		
+		Scanner sc = new Scanner(System.in);
+		String lineInput = sc.nextLine();
+		//Mary had a little lamb. Its fleece was white as snow.
+		
+		Scanner in = new Scanner(lineInput);
+		String word;
+		
+		while(in.hasNext())
+		{
+			word = in.next();
+			if(word.endsWith(".")) 
+			{
+				word = word.substring(0, 1).toUpperCase() + word.substring(1, word.length()-1);
+				s.push(word);
+				while(!s.empty()) 
+				{
+					System.out.print(s.pop());
+					if(s.empty()) 
+					{
+						System.out.print(".");
+					}
+					System.out.print(" ");
+				}
+			}
+			else 
+			{
+				s.push(word.toLowerCase());
+			}
+		}
+	}
+}
