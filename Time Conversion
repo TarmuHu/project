@@ -1,0 +1,100 @@
+import java.util.Scanner;
+
+public class TimeConversion 
+{
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		String militaryTime;
+		String yes = "y";
+		
+		while(yes.equalsIgnoreCase("y")) 
+		{
+			System.out.println("Plesae entry a military time(24 hours)"
+						 	 + " in XX:XX form(five characters only)");
+			militaryTime = sc.next();
+			String errorMessage = "\"" + militaryTime + "\" isn't a valid military time";
+		
+			if(militaryTime.length() == 5
+				&& Character.isDigit(militaryTime.charAt(0))
+			&& Character.isDigit(militaryTime.charAt(1))
+			&& militaryTime.charAt(2) == ':'
+			&& Character.isDigit(militaryTime.charAt(3))
+			&& Character.isDigit(militaryTime.charAt(4)) ) 
+			{
+				int hour = Integer.parseInt(militaryTime.substring(0, 2));
+				int minute = Integer.parseInt(militaryTime.substring(3, 5));
+			
+				if(hour >= 0 && hour < 24 && minute >= 0 && minute < 60) 
+				{
+					if(hour > 12) 
+					{
+						if(minute < 10) 
+						{
+							System.out.println(hour-12 + ":0" + minute + " PM");
+						}
+						else 
+						{
+							System.out.println(hour-12 + ":" + minute + " PM");
+						}
+					}
+					else if(hour == 12) 
+					{
+						if(minute < 10) 
+						{
+							System.out.println(hour + ":0" + minute + " PM");
+						}
+						else 
+						{
+							System.out.println(hour + ":" + minute + " PM");
+						}
+					}
+					else if(hour == 0) 
+					{
+						if(minute < 10) 
+						{
+							System.out.println("12:0" + minute + " AM");
+						}
+						else 
+						{
+							System.out.println("12:" + minute + " AM");
+						}
+					}
+					else if(hour < 10) 
+					{
+						if(minute < 10) 
+						{
+							System.out.println("0" + hour + ":0" + minute + " AM");
+						}
+						else 
+						{
+							System.out.println("0" + hour + ":" + minute + " AM");
+						}
+						}
+					else if(hour < 12) 
+					{
+						if(minute < 10) 
+						{
+							System.out.println(hour + ":0" + minute + " AM");
+						}
+						else 
+						{
+							System.out.println(hour + ":" + minute + " AM");
+						}
+					}
+				}
+				else 
+				{
+					System.out.println(errorMessage);
+				}
+			}
+			else 
+			{
+				System.out.println(errorMessage);
+			}
+			
+			System.out.println("Do you want to enter another military time? (Y/N)");
+			yes = sc.next();
+		}
+	}
+}
